@@ -39,7 +39,7 @@ var pc;
 
 // Peer Connection ICE protocol configuration (either Firefox or Chrome)
 var pc_config = webrtcDetectedBrowser === 'firefox' ?
-  {'iceServers':[{'url':'stun:23.21.150.121'}]} : // IP address
+  {'iceServers':[{'url':'stun:74.125.140.127'}]} : // IP address
   {'iceServers': [{'url': 'stun:stun.l.google.com:19302'}]
 };
 
