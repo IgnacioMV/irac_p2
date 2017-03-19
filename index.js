@@ -1,4 +1,5 @@
 var static = require('node-static');
+var express = require('express');
 
 var https = require('https');
 
@@ -21,12 +22,14 @@ var file = new(static.Server)();
 
 // We use the http module�s createServer function and
 // rely on our instance of node-static to serve the files
-var app = https.createServer(options, function (req, res) {
-  file.serve(req, res);
-}).listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+console.log(PORT);
+var app = express();
+app.use(express.static(__dirname + '/public'));
+
 
 // Use socket.io JavaScript library for real-time web applications
-var io = require('socket.io').listen(app);
+var io = require('socket.io').listen(app.listen(PORT));
 
 // Let's start managing connections...
 io.sockets.on('connection', function (socket){

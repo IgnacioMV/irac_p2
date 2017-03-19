@@ -1,1 +1,1 @@
-web: node cap5/completeNodeServerWithDataChannel.js
+web: node index.js
