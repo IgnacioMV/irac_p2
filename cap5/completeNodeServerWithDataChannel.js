@@ -5,7 +5,7 @@ var https = require('https');
 // Change directory to path of current JavaScript program
 // var process = require('process');
 // process.chdir(__dirname);
-//descomentar las dos líneas anteriores si no se quiere poner el subdirectorio al final, por ej. https://...:8080/cap5/
+//descomentar las dos lï¿½neas anteriores si no se quiere poner el subdirectorio al final, por ej. https://...:8080/cap5/
 
 // Read key and certificates required for https
 var fs = require('fs');
@@ -19,11 +19,11 @@ var options = {
 // Create a node-static server instance
 var file = new(static.Server)();
 
-// We use the http moduleÕs createServer function and
+// We use the http moduleï¿½s createServer function and
 // rely on our instance of node-static to serve the files
 var app = https.createServer(options, function (req, res) {
   file.serve(req, res);
-}).listen(8080);
+}).listen(process.env.PORT || 3000);
 
 // Use socket.io JavaScript library for real-time web applications
 var io = require('socket.io').listen(app);
