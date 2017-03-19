@@ -39,10 +39,10 @@ var pc;
 
 // Peer Connection ICE protocol configuration (either Firefox or Chrome)
 var pc_config = webrtcDetectedBrowser === 'firefox' ?
-  {'iceServers':[{'url':'stun:23.21.150.121'}]} : // IP address
+  {'iceServers':[{'url':'stun:74.125.140.127'}]} : // IP address
   {'iceServers': [{'url': 'stun:stun.l.google.com:19302'}]
 };
-  
+
 var pc_constraints = {
   'optional': [ {'DtlsSrtpKeyAgreement': true} ]
 };
@@ -99,11 +99,11 @@ function handleUserMediaError(error){
 socket.on('created', function (room){
   console.log('Created room ' + room);
   isInitiator = true;
-  
+
   // Call getUserMedia()
   navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
   console.log('Getting user media with constraints', constraints);
-  
+
   checkAndStart();
 });
 
@@ -126,7 +126,7 @@ socket.on('join', function (room){
 socket.on('joined', function (room){
   console.log('This peer has joined room ' + room);
   isChannelReady = true;
-  
+
   // Call getUserMedia()
   navigator.getUserMedia(constraints, handleUserMedia, handleUserMediaError);
   console.log('Getting user media with constraints', constraints);
@@ -174,7 +174,7 @@ function sendMessage(message){
 ////////////////////////////////////////////////////
 // Channel negotiation trigger function
 function checkAndStart() {
-  if (!isStarted && typeof localStream != 'undefined' && isChannelReady) {  
+  if (!isStarted && typeof localStream != 'undefined' && isChannelReady) {
     createPeerConnection();
     isStarted = true;
     if (isInitiator) {
@@ -188,14 +188,14 @@ function checkAndStart() {
 function createPeerConnection() {
   try {
     pc = new RTCPeerConnection(pc_config, pc_constraints);
-    
+
     console.log("Calling pc.addStream(localStream)! Initiator: " + isInitiator);
     pc.addStream(localStream);
-    
+
     pc.onicecandidate = handleIceCandidate;
     console.log('Created RTCPeerConnnection with:\n' +
       '  config: \'' + JSON.stringify(pc_config) + '\';\n' +
-      '  constraints: \'' + JSON.stringify(pc_constraints) + '\'.'); 
+      '  constraints: \'' + JSON.stringify(pc_constraints) + '\'.');
   } catch (e) {
     console.log('Failed to create PeerConnection, exception: ' + e.message);
     alert('Cannot create RTCPeerConnection object.');
@@ -218,7 +218,7 @@ function createPeerConnection() {
     sendChannel.onopen = handleSendChannelStateChange;
     sendChannel.onmessage = handleMessage;
     sendChannel.onclose = handleSendChannelStateChange;
-  } else { // Joiner    
+  } else { // Joiner
     pc.ondatachannel = gotReceiveChannel;
   }
 }
@@ -304,7 +304,7 @@ function onSignalingError(error) {
 // Create Answer
 function doAnswer() {
   console.log('Sending answer to peer.');
-  pc.createAnswer(setLocalAndSendMessage, onSignalingError, sdpConstraints);  
+  pc.createAnswer(setLocalAndSendMessage, onSignalingError, sdpConstraints);
 }
 
 // Success handler for both createOffer()
@@ -348,7 +348,7 @@ function stop() {
   isStarted = false;
   if (sendChannel) sendChannel.close();
   if (receiveChannel) receiveChannel.close();
-  if (pc) pc.close();  
+  if (pc) pc.close();
   pc = null;
   sendButton.disabled=true;
 }
