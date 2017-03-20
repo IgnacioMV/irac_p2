@@ -27,9 +27,10 @@ console.log(PORT);
 var app = express();
 app.use(express.static(__dirname + '/public'));
 
+var httpsServer = https.createServer(options, app);
 
 // Use socket.io JavaScript library for real-time web applications
-var io = require('socket.io').listen(app.listen(PORT));
+var io = require('socket.io').listen(httpsServer.listen(PORT));
 
 // Let's start managing connections...
 io.sockets.on('connection', function (socket){
