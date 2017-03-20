@@ -1,4 +1,3 @@
-var static = require('node-static');
 var express = require('express');
 
 var http = require('http');
@@ -12,21 +11,13 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
-var options = {
-  key: fs.readFileSync(path.join(__dirname,'key.pem')),
-  //key: fs.readFileSync(path.join(__dirname,'key.pem')),
-  cert: fs.readFileSync(path.join(__dirname,'cert.pem'))
-};
-// Create a node-static server instance
-var file = new(static.Server)();
-
-// We use the http module�s createServer function and
-// rely on our instance of node-static to serve the files
+// Create an express static server to serve our files
 const PORT = process.env.PORT || 3000;
 console.log(PORT);
 var app = express();
 app.use(express.static(__dirname + '/public'));
 
+//We create an http server
 var httpServer = http.createServer(app);
 
 // Use socket.io JavaScript library for real-time web applications
