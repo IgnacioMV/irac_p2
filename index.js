@@ -1,7 +1,7 @@
 var static = require('node-static');
 var express = require('express');
 
-var https = require('https');
+var http = require('http');
 
 // Change directory to path of current JavaScript program
 // var process = require('process');
@@ -27,10 +27,10 @@ console.log(PORT);
 var app = express();
 app.use(express.static(__dirname + '/public'));
 
-var httpsServer = https.createServer(options, app);
+var httpServer = http.createServer(app);
 
 // Use socket.io JavaScript library for real-time web applications
-var io = require('socket.io').listen(httpsServer.listen(PORT));
+var io = require('socket.io').listen(httpServer.listen(PORT));
 
 // Let's start managing connections...
 io.sockets.on('connection', function (socket){
