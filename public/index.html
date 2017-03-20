@@ -29,13 +29,17 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<textarea rows="4" cols="100" id="dataChannelSend" disabled
-			placeholder="This will be enabled once the data channel is up..."></textarea>
+				<div style="padding: 10px; align: center; overflow: scroll; height: 200px; width: 800px; white-space: pre-wrap; border:1px solid black" contenteditable="true" id="dataChannelReceive"></div>
 			</td>
-
 		</tr>
 		<tr>
-			<td align="center">
+			<td colspan="2" align="center">
+				<textarea rows="1" cols="100" id="dataChannelSend" disabled
+			placeholder="This will be enabled once the data channel is up..."></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
 				<button id="sendButton" disabled>Send</button>
 			</td>
 			<td></td>
